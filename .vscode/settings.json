@@ -1,8 +1,10 @@
 {
     "editor.formatOnSave": true,
+    "files.insertFinalNewline": true,
     "C_Cpp.clang_format_fallbackStyle": "LLVM",
     "files.associations": {
         "**/include/c++/**": "cpp",
         "algorithm": "cpp"
-    }
+    },
+    "sonarlint.pathToCompileCommands": "${workspaceFolder}/build/compile_commands.json"
 }

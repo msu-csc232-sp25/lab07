@@ -25,6 +25,7 @@ set(SRC_MAIN_FILES src/main/cpp/main.cpp src/main/cpp/expanded_templates.cpp)
 set(SRC_DEMO_FILES src/main/cpp/demo.cpp)
 set(SRC_TASK1_TEST_FILES src/test/cpp/task1_test.cpp src/main/cpp/expanded_templates.cpp)
 set(SRC_TASK2_TEST_FILES src/test/cpp/task2_test.cpp src/main/cpp/expanded_templates.cpp)
+set(SRC_TASK3_TEST_FILES src/test/cpp/task3_test.cpp src/main/cpp/expanded_templates.cpp)
 
 # Setup Google Test
 set(GOOGLE_TEST_ARCHIVE "v1.14.0")
@@ -43,25 +44,30 @@ add_executable(main ${SRC_MAIN_FILES})
 add_executable(demo ${SRC_DEMO_FILES})
 add_executable(task1_test ${SRC_TASK1_TEST_FILES})
 add_executable(task2_test ${SRC_TASK2_TEST_FILES})
+add_executable(task3_test ${SRC_TASK3_TEST_FILES})
 
 # Now simply link against gtest or gtest_main as needed.
 target_link_libraries(task1_test GTest::gtest_main)
 target_link_libraries(task2_test GTest::gtest_main)
+target_link_libraries(task3_test GTest::gtest_main)
 
 include(GoogleTest)
 gtest_discover_tests(task1_test)
 gtest_discover_tests(task2_test)
+gtest_discover_tests(task3_test)
 
 target_include_directories(main PUBLIC ${CMAKE_CURRENT_LIST_DIR}/include ${CMAKE_CURRENT_LIST_DIR}/src/main/cpp)
 target_include_directories(demo PUBLIC ${CMAKE_CURRENT_LIST_DIR}/include ${CMAKE_CURRENT_LIST_DIR}/src/main/cpp)
 target_include_directories(task1_test PUBLIC ${CMAKE_CURRENT_LIST_DIR}/include ${CMAKE_CURRENT_LIST_DIR}/src/main/cpp)
 target_include_directories(task2_test PUBLIC ${CMAKE_CURRENT_LIST_DIR}/include ${CMAKE_CURRENT_LIST_DIR}/src/main/cpp)
+target_include_directories(task3_test PUBLIC ${CMAKE_CURRENT_LIST_DIR}/include ${CMAKE_CURRENT_LIST_DIR}/src/main/cpp)
 
 # add custom commands that copy data input files to target working directories
 add_custom_command(TARGET main PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_LIST_DIR}/src/main/resources/main_data.txt ${CMAKE_CURRENT_BINARY_DIR})
 add_custom_command(TARGET demo PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_LIST_DIR}/src/main/resources/demo_data.txt ${CMAKE_CURRENT_BINARY_DIR})
 add_custom_command(TARGET task1_test PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_LIST_DIR}/src/test/resources/task1_test_data.txt ${CMAKE_CURRENT_BINARY_DIR})
 add_custom_command(TARGET task2_test PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_LIST_DIR}/src/test/resources/task2_test_data.txt ${CMAKE_CURRENT_BINARY_DIR})
+add_custom_command(TARGET task3_test PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_LIST_DIR}/src/test/resources/task3_test_data.txt ${CMAKE_CURRENT_BINARY_DIR})
 
 if (IS_HW)
     set(SRC_TASK4_TEST_FILES src/test/cpp/task4_test.cpp)
