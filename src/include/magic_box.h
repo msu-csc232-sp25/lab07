@@ -10,7 +10,14 @@
 namespace csc232
 {
     // Task 1a - Declare the MagicBox class below
-
+    template<typename T>
+    class MagicBox : public PlainBox<T>
+    {
+    public:
+        MagicBox();
+        explicit MagicBox(const T& item);
+    };
+    
 }
 
 #endif
